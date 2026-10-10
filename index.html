@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a5c36">
+<link rel="icon" href="icon-192.png">
+<title>خدماتي</title>
+<style>
+:root{--bg:#f2f5f4;--card:#fff;--ink:#14302a;--mute:#5f7a72;--g1:#0b6b4f;--g2:#12936c;--ok:#1aa76f;--line:#e0e8e5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1714;--card:#16231f;--ink:#e8f2ee;--mute:#8fada3;--line:#243630}}
+:root[data-theme="dark"]{--bg:#0d1714;--card:#16231f;--ink:#e8f2ee;--mute:#8fada3;--line:#243630}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;max-width:480px;margin-inline:auto;min-height:100vh;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+header{background:linear-gradient(160deg,var(--g1),var(--g2));color:#fff;padding:18px 18px 70px;border-radius:0 0 28px 28px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:700;font-size:20px}
+.bell{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;border:0;color:#fff;font-size:18px}
+.hi{margin-top:18px;font-size:14px;opacity:.85}
+.name{font-size:22px;font-weight:700}
+.id{margin:-52px 16px 0;background:var(--card);border-radius:20px;padding:16px;box-shadow:0 6px 20px rgba(0,0,0,.12);display:flex;gap:14px;align-items:center}
+.av{width:56px;height:56px;border-radius:16px;background:linear-gradient(160deg,var(--g1),var(--g2));color:#fff;display:grid;place-items:center;font-size:24px;font-weight:700}
+.id b{display:block;font-size:16px}
+.id small{color:var(--mute)}
+.badge{margin-inline-start:auto;text-align:center;font-size:12px;color:var(--ok);font-weight:600}
+.badge i{display:block;width:44px;height:44px;border-radius:50%;border:3px solid var(--ok);margin:0 auto 4px;display:grid;place-items:center;font-style:normal;font-size:20px}
+h2{font-size:16px;margin:22px 18px 10px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 14px}
+.s{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 4px;text-align:center;font:inherit;color:var(--ink);cursor:pointer}
+.s span{display:block;font-size:24px;margin-bottom:6px}
+.s em{font-style:normal;font-size:12px;line-height:1.3;display:block}
+.s:focus-visible,nav button:focus-visible{outline:3px solid var(--g2);outline-offset:2px}
+.banner{margin:18px 14px 0;padding:16px;border-radius:18px;background:var(--card);border:1px solid var(--line);display:flex;gap:12px;align-items:center}
+.banner span{font-size:28px}
+.banner p{margin:0;font-size:13px;color:var(--mute)}
+.banner b{color:var(--ink);font-size:14px}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--card);border-top:1px solid var(--line);display:flex;padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;background:none;border:0;font:inherit;font-size:11px;color:var(--mute);display:grid;gap:2px;justify-items:center;padding:4px;cursor:pointer}
+nav button span{font-size:22px}
+nav button.on{color:var(--g1);font-weight:700}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:9}
+.sheet.open{display:flex}
+.panel{background:var(--card);width:100%;max-width:480px;border-radius:24px 24px 0 0;padding:22px 20px calc(24px + env(safe-area-inset-bottom,0px));animation:up .22s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.panel{animation:none}}
+.panel h3{margin:0 0 6px;font-size:18px}
+.panel p{color:var(--mute);margin:0 0 16px;font-size:14px}
+.btn{width:100%;padding:14px;border:0;border-radius:14px;background:linear-gradient(160deg,var(--g1),var(--g2));color:#fff;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.ghost{background:none;color:var(--mute);margin-top:6px}
+.toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--g1);color:#fff;padding:10px 18px;border-radius:30px;font-size:14px;display:none;z-index:10}
+[hidden]{display:none!important}
+body.locked{padding-bottom:0}
+body.locked>*:not(#login):not(.toast):not(#sms){display:none}
+#login{display:none;min-height:100vh;flex-direction:column;justify-content:center;padding:24px 22px;background:linear-gradient(160deg,var(--g1),var(--g2));color:#fff}
+body.locked #login{display:flex}
+.lg-logo{font-size:32px;font-weight:700;text-align:center}
+.lg-sub{text-align:center;opacity:.85;margin:4px 0 26px;font-size:14px}
+.lg-card{background:var(--card);color:var(--ink);border-radius:22px;padding:22px 18px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.lg-card h3{margin:0 0 4px;font-size:18px}
+.lg-card .hint{margin:0 0 16px;font-size:13px;color:var(--mute)}
+.lg-card label{display:block;font-size:13px;color:var(--mute);margin:0 0 6px}
+.lg-card input.f{width:100%;padding:14px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:15px;background:var(--bg);color:var(--ink);margin-bottom:14px}
+.lg-card input:focus-visible{outline:3px solid var(--g2);outline-offset:1px}
+.otp{display:flex;gap:10px;justify-content:center;direction:ltr;margin:18px 0 8px}
+.otp input{width:56px;height:62px;text-align:center;font-size:26px;font-weight:700;border:1px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink)}
+.err{color:#d23b3b;font-size:13px;min-height:18px;margin:0 0 8px;text-align:center}
+.link{background:none;border:0;color:var(--g1);font:inherit;font-size:14px;font-weight:600;width:100%;margin-top:10px;cursor:pointer}
+#sms{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:456px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:12px 14px;box-shadow:0 8px 24px rgba(0,0,0,.25);display:none;z-index:20;cursor:pointer;animation:up .25s ease-out}
+#sms.show{display:block}
+#sms small{color:var(--mute);display:block;margin-bottom:2px}
+#sms b{letter-spacing:2px}
+:root{--g1:#0a5c36;--g2:#17824f;--gold:#c9a24b}
+header{border-radius:0 0 22px 22px;padding-bottom:64px}
+.docs{display:flex;gap:12px;overflow-x:auto;padding:0 14px 6px;scroll-snap-type:x mandatory}
+.doc{flex:0 0 80%;scroll-snap-align:start;border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,#0a5c36,#1f9460);min-height:128px;display:flex;flex-direction:column;justify-content:space-between}
+.doc:nth-child(2){background:linear-gradient(135deg,#34444e,#5b6e7a)}
+.doc:nth-child(3){background:linear-gradient(135deg,#8a6d2b,var(--gold))}
+.doc small{opacity:.88;font-size:13px}
+.doc b{font-size:18px}
+.doc span{font-size:13px;opacity:.9;direction:ltr;text-align:right}
+.grid{grid-template-columns:repeat(2,1fr)}
+.s{display:flex;align-items:center;gap:10px;padding:14px 12px;text-align:right}
+.s span{display:grid;place-items:center;width:42px;height:42px;margin:0;border-radius:12px;background:var(--bg);font-size:22px;flex:none}
+.s em{font-size:13px;font-weight:600}
+</style>
+</head>
+<body class="locked">
+<div id="sms" role="alert"><small>💬 رسائل · الآن</small><span id="smsb"></span></div>
+<main id="login">
+  <div class="lg-logo">خدماتي</div>
+  <div class="lg-sub">بوابتك لجميع الخدمات</div>
+  <div class="lg-card">
+    <div id="step1">
+      <h3>تسجيل الدخول</h3><p class="hint">أدخل بياناتك للمتابعة</p>
+      <label for="u">اسم المستخدم</label>
+      <input class="f" id="u" autocomplete="username" autocapitalize="off">
+      <label for="p">كلمة المرور</label>
+      <input class="f" id="p" type="password" autocomplete="current-password">
+      <div class="err" id="e1" role="alert"></div>
+      <button class="btn" id="go1">تسجيل الدخول</button>
+    </div>
+    <div id="step2" hidden>
+      <h3>رمز التحقق</h3><p class="hint">أرسلنا رمزاً من 4 أرقام إلى جوالك. أدخله للدخول.</p>
+      <div class="otp" id="otp">
+        <input inputmode="numeric" maxlength="4" autocomplete="one-time-code" aria-label="الرقم 1">
+        <input inputmode="numeric" maxlength="1" aria-label="الرقم 2">
+        <input inputmode="numeric" maxlength="1" aria-label="الرقم 3">
+        <input inputmode="numeric" maxlength="1" aria-label="الرقم 4">
+      </div>
+      <div class="err" id="e2" role="alert"></div>
+      <button class="link" id="resend">إعادة إرسال الرمز</button>
+      <button class="link" id="back" style="color:var(--mute)">تغيير اسم المستخدم</button>
+    </div>
+  </div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<header>
+  <div class="top"><div class="logo">خدماتي</div><button class="bell" aria-label="الإشعارات">🔔</button></div>
+  <div class="hi">أهلاً بك</div>
+  <div class="name">محمد العتيبي</div>
+</header>
+
+<section class="id" aria-label="بطاقة الهوية">
+  <div class="av">م</div>
+  <div><b>محمد العتيبي</b><small>رقم الهوية ••••• 4821</small></div>
+  <div class="badge"><i>✓</i>سارية</div>
+</section>
+
+<h2>مستنداتي</h2>
+<div class="docs">
+  <div class="doc"><small>الهوية الوطنية</small><b class="uname">محمد العتيبي</b><span>10••••••21</span></div>
+  <div class="doc"><small>رخصة القيادة</small><b class="uname">محمد العتيبي</b><span>ساري حتى 1449/03/12</span></div>
+  <div class="doc"><small>استمارة المركبة</small><b>سيارة سيدان</b><span>أ ب ج 1234</span></div>
+</div>
+<h2>الخدمات</h2>
+<div class="grid" id="grid"></div>
+
+<div class="banner"><span>📌</span><div><b>لا توجد مواعيد قادمة</b><p>احجز موعدك من قسم الصحة أو المرور.</p></div></div>
+
+<nav>
+  <button class="on"><span>🏠</span>الرئيسية</button>
+  <button data-t="الخدمات"><span>🗂️</span>الخدمات</button>
+  <button data-t="المستندات"><span>🪪</span>مستنداتي</button>
+  <button data-t="الإشعارات"><span>🔔</span>الإشعارات</button>
+  <button data-t="حسابي"><span>👤</span>حسابي</button>
+</nav>
+
+<div class="sheet" id="sheet">
+  <div class="panel" role="dialog" aria-modal="true">
+    <h3 id="st"></h3><p id="sp"></p>
+    <button class="btn" id="go">ابدأ الخدمة</button>
+    <button class="btn ghost" id="cancel">إغلاق</button>
+  </div>
+</div>
+
+<script>
+const services=[
+["🏥","الصحة","احجز موعداً أو اطلع على سجلك الصحي."],
+["🚗","المرور","تجديد الرخصة والاستمارة ودفع المخالفات."],
+["🪪","الهوية","تجديد الهوية وطباعة المستندات الرسمية."],
+["🛂","الجوازات","تجديد الجواز وخدمات السفر."],
+["🏠","السكن","عقود الإيجار وخدمات العقار."],
+["🎓","التعليم","نتائج الطلاب والتسجيل في المدارس."],
+["💼","العمل","عقود العمل وخدمات التوظيف."],
+["⚖️","العدل","مواعيد المحاكم وخدمات التوثيق."],
+["💳","المدفوعات","فواتير الكهرباء والماء والجهات الحكومية."],
+["🕌","الحج والعمرة","حجز التصاريح والمواعيد."],
+["📄","الوثائق","الشهادات والمستندات الإلكترونية."],
+["☎️","الدعم","تواصل معنا لأي استفسار."]
+];
+const g=document.getElementById('grid'),sheet=document.getElementById('sheet'),
+st=document.getElementById('st'),sp=document.getElementById('sp'),toast=document.getElementById('toast');
+let cur='';
+const servicesNew=[
+["🪪","الأحوال المدنية","تجديد الهوية وإصدار الوثائق."],
+["🚗","المرور","تجديد الرخصة والاستمارة ودفع المخالفات."],
+["🛂","الجوازات","تجديد الجواز وخدمات السفر."],
+["👨‍👩‍👧","الأفراد التابعون","إدارة بيانات أفراد الأسرة."],
+["🚙","مركباتي","عرض مركباتك وخدماتها."],
+["📅","المواعيد","احجز موعداً أو عدّل موعدك."],
+["💳","المدفوعات","سداد الرسوم والمخالفات."],
+["🏢","خدمات الأعمال","خدمات المنشآت والسجلات."],
+["🌍","خدمات المقيمين","الإقامة وتأشيرات الخروج والعودة."],
+["🚨","البلاغات","قدّم بلاغاً أو تابع بلاغاتك."],
+["📄","الوثائق","صحيفة الحالة الجنائية والشهادات."],
+["☎️","الدعم","تواصل معنا لأي استفسار."]
+];
+servicesNew.forEach(([i,n,d])=>{
+  const b=document.createElement('button');b.className='s';
+  b.innerHTML='<span>'+i+'</span><em>'+n+'</em>';
+  b.onclick=()=>open(n,d);g.appendChild(b);
+});
+function open(n,d){cur=n;st.textContent=n;sp.textContent=d;sheet.classList.add('open')}
+function close(){sheet.classList.remove('open')}
+function say(t){toast.textContent=t;toast.style.display='block';setTimeout(()=>toast.style.display='none',2200)}
+document.getElementById('cancel').onclick=close;
+sheet.onclick=e=>{if(e.target===sheet)close()};
+document.getElementById('go').onclick=()=>{close();say('تم فتح خدمة '+cur)};
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  if(b.dataset.t)say(b.dataset.t);
+});
+(function(){
+  const $=id=>document.getElementById(id),ds=[...document.querySelectorAll('#otp input')];
+  let code='',user='',t;
+  function sendCode(){
+    code=String(1000+Math.floor(Math.random()*9000));
+    $('smsb').innerHTML='رمز التحقق الخاص بك في خدماتي: <b>'+code+'</b>. لا تشاركه مع أي أحد.';
+    clearTimeout(t);
+    t=setTimeout(()=>{$('sms').classList.add('show');t=setTimeout(hideSms,25000)},900);
+  }
+  function hideSms(){$('sms').classList.remove('show')}
+  $('sms').onclick=hideSms;
+  function clearOtp(){ds.forEach(d=>d.value='');ds[0].focus()}
+  $('go1').onclick=()=>{
+    const u=$('u').value.trim(),p=$('p').value;
+    if(!u||!p){$('e1').textContent='أدخل اسم المستخدم وكلمة المرور';return}
+    user=u;$('e1').textContent='';
+    $('step1').hidden=true;$('step2').hidden=false;
+    sendCode();clearOtp();
+  };
+  $('p').addEventListener('keydown',e=>{if(e.key==='Enter')$('go1').click()});
+  $('back').onclick=()=>{hideSms();clearTimeout(t);$('step2').hidden=true;$('step1').hidden=false;$('e2').textContent=''};
+  $('resend').onclick=()=>{$('e2').textContent='';clearOtp();hideSms();sendCode()};
+  function check(){
+    const v=ds.map(d=>d.value).join('');
+    if(v.length<4)return;
+    if(v===code){
+      hideSms();clearTimeout(t);
+      document.body.classList.remove('locked');
+      document.querySelector('.name').textContent=user;
+      document.querySelector('.id b').textContent=user;
+      document.querySelector('.av').textContent=[...user][0];
+      document.querySelectorAll('.uname').forEach(x=>x.textContent=user);
+      window.scrollTo(0,0);say('أهلاً '+user);
+    }else{$('e2').textContent='الرمز غير صحيح، حاول مرة أخرى';clearOtp()}
+  }
+  ds.forEach((d,i)=>{
+    d.addEventListener('input',()=>{
+      const s=d.value.replace(/\D/g,'');
+      if(s.length>1){s.slice(0,4).split('').forEach((c,k)=>{if(ds[k])ds[k].value=c});ds[Math.min(s.length,4)-1].focus();check();return}
+      d.value=s;$('e2').textContent='';
+      if(s&&ds[i+1])ds[i+1].focus();
+      check();
+    });
+    d.addEventListener('keydown',e=>{if(e.key==='Backspace'&&!d.value&&ds[i-1]){ds[i-1].focus()}});
+  });
+  ds[1].maxLength=ds[2].maxLength=ds[3].maxLength=1;
+})();
+</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
+</body>
+</html>
